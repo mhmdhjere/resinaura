@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Resin Art Catalog - Horizontal Layout</title>
+    <style>
+        /* CSS for styling the page */
+        body {
+            /* --- BACKGROUND IMAGE CODE --- */
+            background-image: url('https://i.ibb.co/8LYh7YvV/photo-2025-07-11-20-42-52.jpg'); /* <-- CHANGE THIS URL */
+            background-size: cover; /* Makes the image cover the entire screen */
+            background-position: center; /* Centers the image */
+            background-attachment: fixed; /* Keeps the image fixed while scrolling */
+            /* --- End of Background Code --- */
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            margin: 0;
+            background-color: #f8f9fa; /* A soft, light grey background */
+            color: #333;
+        }
+
+        header {
+            text-align: center;
+            padding: 2.5rem 1rem;
+            background-color: #ffffff;
+            border-bottom: 1px solid #e9ecef;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            color: #343a40;
+            margin: 0;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            color: #6c757d;
+            max-width: 600px;
+            margin: 0.5rem auto 0;
+        }
+
+        .header-logo {
+            max-height: 300px; /* Controls the maximum height of your logo. Adjust as needed. */
+            width: auto; /* Maintains the aspect ratio */
+        }
+
+        /* Container for all the catalog items */
+        .catalog-list {
+            max-width: 900px; /* Controls the overall width of the list */
+            margin: 3rem auto; /* Centers the list on the page */
+            padding: 0 1rem;
+        }
+
+        .art-item {
+            display: flex; /* This is the key! It places child elements (image and description) side-by-side */
+            align-items: center; /* Vertically aligns the image and text to the center */
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+            margin-bottom: 2rem; /* Space between catalog items */
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .art-item:hover {
+            transform: translateY(-5px); /* Lifts the card slightly on hover */
+            box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+        }
+
+        /* Styling for the image */
+        .art-item .item-image {
+            width: 175px;  /* Set a fixed small width for the image */
+            height: 175px; /* Set a fixed small height for the image */
+            object-fit: cover; /* Ensures the image fills the space without distortion */
+            flex-shrink: 0; /* Prevents the image from shrinking if the text is long */
+        }
+        
+        /* Styling for the description container */
+        .art-item .description {
+            padding: 1rem 2rem; /* Add padding inside the description area */
+        }
+
+        .description h2 {
+            margin-top: 0;
+            font-size: 1.5rem;
+            color: #495057;
+        }
+
+        .description p {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #6c757d;
+            margin-bottom: 0;
+        }
+        
+        /* Media query for smaller screens */
+        @media (max-width: 600px) {
+            .art-item {
+                flex-direction: column; /* Stack image and text vertically on small screens */
+            }
+            .art-item .item-image {
+                width: 100%; /* Image takes full width */
+                height: 250px;
+            }
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            margin-top: 2rem;
+            background-color: #343a40;
+            color: #f8f9fa;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <img src="https://i.ibb.co/qbFJ0vf/Whats-App-Image-2025-07-12-at-04-14-59-cf5516cf.jpg" alt="My Resin Art Logo" class="header-logo">
+    </header>
+
+    <main class="catalog-list">
+    
+        <div class="art-item">
+            <img class="item-image" src="https://images.squarespace-cdn.com/content/v1/60f960aac2eb604dcfb280fa/1718445413051-SDA2JHYM8I18MOFCMMH0/ocean-art1.jpg?format=1000w" alt="A beautiful ocean-themed resin coaster">
+            <div class="description">
+                <h2>Azure Ocean Coasters</h2>
+                <p>A set of four handcrafted coasters capturing the depth and beauty of the ocean waves. Made with multiple layers of pigmented resin.</p>
+            </div>
+        </div>
+
+        <div class="art-item">
+            <img class="item-image" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRG0aAdMRoaMXKDb3uaD5BrslLNYaIlvL-IBw&s" alt="A delicate resin tray with embedded flowers">
+            <div class="description">
+                <h2>Enchanted Garden Tray</h2>
+                <p>A delicate and functional serving tray featuring real dried flowers preserved in crystal-clear resin. A truly one-of-a-kind piece.</p>
+            </div>
+        </div>
+        
+        <div class="art-item">
+            <img class="item-image" src="https://www.littlelaneworkshops.com.au/cdn/shop/files/2_d851f075-8ff1-4501-8932-845578da859d.png?v=1702432662" alt="A pyramid with a galaxy effect">
+            <div class="description">
+                <h2>Nebula Pyramid</h2>
+                <p>A mesmerizing pyramid capturing a miniature galaxy. Created with deep blues, purples, and shimmering mica powders.</p>
+            </div>
+        </div>
+
+        <div class="art-item">
+            <img class="item-image" src="https://paintcafe.in/cdn/shop/files/IMG_9992_4711a30c-52f5-4bbc-bee0-ae504a6ee823.webp?v=1690891911" alt="A geode-inspired resin art piece">
+            <div class="description">
+                <h2>Emerald Geode Slice</h2>
+                <p>This wall art piece combines vibrant emerald greens, gold leaf accents, and crushed glass to create a stunning, sparkling effect.</p>
+            </div>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Your Name Here. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
