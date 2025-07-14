@@ -3,154 +3,158 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Resin Art Catalog - Horizontal Layout</title>
+    <title>Resin Art Catalog with Carousels</title>
     <style>
-        /* CSS for styling the page */
+        /* General Body and Header Styles (mostly unchanged) */
         body {
-            /* --- BACKGROUND IMAGE CODE --- */
             background-image: url('https://i.ibb.co/8LYh7YvV/photo-2025-07-11-20-42-52.jpg'); /* <-- CHANGE THIS URL */
             background-size: cover; /* Makes the image cover the entire screen */
             background-position: center; /* Centers the image */
             background-attachment: fixed; /* Keeps the image fixed while scrolling */
-            /* --- End of Background Code --- */
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             margin: 0;
-            background-color: #f8f9fa; /* A soft, light grey background */
-            color: #333;
+            background-color: #f8f9fa;
         }
-
         header {
             text-align: center;
-            padding: 2.5rem 1rem;
+            padding: 1.5rem;
             background-color: #ffffff;
             border-bottom: 1px solid #e9ecef;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
         }
-
-        header h1 {
-            font-size: 2.5rem;
-            color: #343a40;
-            margin: 0;
-        }
-
-        header p {
-            font-size: 1.1rem;
-            color: #6c757d;
-            max-width: 600px;
-            margin: 0.5rem auto 0;
-        }
-
         .header-logo {
-            max-height: 300px; /* Controls the maximum height of your logo. Adjust as needed. */
-            width: auto; /* Maintains the aspect ratio */
+            max-height: 80px;
+            width: auto;
         }
-
-        /* Container for all the catalog items */
         .catalog-list {
-            max-width: 900px; /* Controls the overall width of the list */
-            margin: 3rem auto; /* Centers the list on the page */
+            max-width: 900px;
+            margin: 3rem auto;
             padding: 0 1rem;
         }
-
         .art-item {
-            display: flex; /* This is the key! It places child elements (image and description) side-by-side */
-            align-items: center; /* Vertically aligns the image and text to the center */
+            display: flex;
+            align-items: center;
             background-color: #ffffff;
             border-radius: 12px;
             box-shadow: 0 6px 12px rgba(0,0,0,0.08);
-            margin-bottom: 2rem; /* Space between catalog items */
+            margin-bottom: 2rem;
             overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        
-        .art-item:hover {
-            transform: translateY(-5px); /* Lifts the card slightly on hover */
-            box-shadow: 0 12px 24px rgba(0,0,0,0.1);
-        }
-
-        /* Styling for the image */
-        .art-item .item-image {
-            width: 175px;  /* Set a fixed small width for the image */
-            height: 175px; /* Set a fixed small height for the image */
-            object-fit: cover; /* Ensures the image fills the space without distortion */
-            flex-shrink: 0; /* Prevents the image from shrinking if the text is long */
-        }
-        
-        /* Styling for the description container */
         .art-item .description {
-            padding: 1rem 2rem; /* Add padding inside the description area */
+            padding: 1rem 1.5rem;
+            flex-grow: 1; /* Allows description to fill remaining space */
         }
-
         .description h2 {
             margin-top: 0;
-            font-size: 1.5rem;
-            color: #495057;
+            font-size: 1.2rem;
         }
-
         .description p {
-            font-size: 1rem;
-            line-height: 1.6;
-            color: #6c757d;
-            margin-bottom: 0;
+            font-size: 0.9rem;
+            line-height: 1.5;
         }
-        
-        /* Media query for smaller screens */
-        @media (max-width: 600px) {
-            .art-item {
-                flex-direction: column; /* Stack image and text vertically on small screens */
-            }
-            .art-item .item-image {
-                width: 100%; /* Image takes full width */
-                height: 250px;
-            }
-        }
-
         footer {
             text-align: center;
             padding: 2rem;
-            margin-top: 2rem;
             background-color: #343a40;
             color: #f8f9fa;
+        }
+
+        /* --- NEW CAROUSEL STYLES --- */
+        .carousel-container {
+            position: relative; /* Essential for positioning buttons */
+            width: 200px; /* Define a fixed width for the image area */
+            height: 200px; /* And a fixed height */
+            flex-shrink: 0; /* Prevents the container from shrinking */
+        }
+
+        .carousel-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: none; /* Hide all images by default */
+        }
+
+        .carousel-image.active {
+            display: block; /* Show only the active image */
+        }
+
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(255, 255, 255, 0.7);
+            border: none;
+            color: #333;
+            font-size: 1.5rem;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+            transition: background-color 0.2s ease;
+            user-select: none; /* Prevents text selection on double click */
+        }
+
+        .carousel-btn:hover {
+            background-color: rgba(255, 255, 255, 1);
+        }
+
+        .prev-btn {
+            left: 5px;
+        }
+
+        .next-btn {
+            right: 5px;
         }
     </style>
 </head>
 <body>
 
     <header>
-        <img src="https://i.ibb.co/qbFJ0vf/Whats-App-Image-2025-07-12-at-04-14-59-cf5516cf.jpg" alt="My Resin Art Logo" class="header-logo">
+        <img src="https://placehold.co/350x100/333333/FFFFFF?text=YOUR+LOGO" alt="My Resin Art Logo" class="header-logo">
     </header>
 
     <main class="catalog-list">
     
         <div class="art-item">
-            <img class="item-image" src="https://images.squarespace-cdn.com/content/v1/60f960aac2eb604dcfb280fa/1718445413051-SDA2JHYM8I18MOFCMMH0/ocean-art1.jpg?format=1000w" alt="A beautiful ocean-themed resin coaster">
+            <div class="carousel-container">
+                <img class="carousel-image active" src="https://placehold.co/400x400/7B68EE/FFFFFF?text=Coaster+1" alt="Ocean Coaster Top View">
+                <img class="carousel-image" src="https://placehold.co/400x400/6A5ACD/FFFFFF?text=Coaster+2" alt="Ocean Coaster Side View">
+                <img class="carousel-image" src="https://placehold.co/400x400/483D8B/FFFFFF?text=Coaster+3" alt="Ocean Coaster Detail">
+                
+                <button class="carousel-btn prev-btn">&lt;</button>
+                <button class="carousel-btn next-btn">&gt;</button>
+            </div>
             <div class="description">
                 <h2>Azure Ocean Coasters</h2>
-                <p>A set of four handcrafted coasters capturing the depth and beauty of the ocean waves. Made with multiple layers of pigmented resin.</p>
+                <p>A set of four handcrafted coasters capturing the depth of the ocean waves. Use the arrows to see more details.</p>
             </div>
         </div>
 
         <div class="art-item">
-            <img class="item-image" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRG0aAdMRoaMXKDb3uaD5BrslLNYaIlvL-IBw&s" alt="A delicate resin tray with embedded flowers">
+            <div class="carousel-container">
+                <img class="carousel-image active" src="https://placehold.co/400x400/FFC0CB/333333?text=Tray+1" alt="Floral Tray Full View">
+                <img class="carousel-image" src="https://placehold.co/400x400/FFB6C1/333333?text=Tray+2" alt="Floral Tray Angle View">
+
+                <button class="carousel-btn prev-btn">&lt;</button>
+                <button class="carousel-btn next-btn">&gt;</button>
+            </div>
             <div class="description">
                 <h2>Enchanted Garden Tray</h2>
-                <p>A delicate and functional serving tray featuring real dried flowers preserved in crystal-clear resin. A truly one-of-a-kind piece.</p>
+                <p>A delicate serving tray featuring real dried flowers. Use the arrows to see different angles.</p>
             </div>
         </div>
-        
+
         <div class="art-item">
-            <img class="item-image" src="https://www.littlelaneworkshops.com.au/cdn/shop/files/2_d851f075-8ff1-4501-8932-845578da859d.png?v=1702432662" alt="A pyramid with a galaxy effect">
+             <div class="carousel-container">
+                <img class="carousel-image active" src="https://placehold.co/400x400/4682B4/FFFFFF?text=Galaxy+Pyramid" alt="A pyramid with a galaxy effect">
+             </div>
             <div class="description">
                 <h2>Nebula Pyramid</h2>
                 <p>A mesmerizing pyramid capturing a miniature galaxy. Created with deep blues, purples, and shimmering mica powders.</p>
-            </div>
-        </div>
-
-        <div class="art-item">
-            <img class="item-image" src="https://paintcafe.in/cdn/shop/files/IMG_9992_4711a30c-52f5-4bbc-bee0-ae504a6ee823.webp?v=1690891911" alt="A geode-inspired resin art piece">
-            <div class="description">
-                <h2>Emerald Geode Slice</h2>
-                <p>This wall art piece combines vibrant emerald greens, gold leaf accents, and crushed glass to create a stunning, sparkling effect.</p>
             </div>
         </div>
 
@@ -159,6 +163,57 @@
     <footer>
         <p>&copy; 2025 Your Name Here. All rights reserved.</p>
     </footer>
+
+    <script>
+        // This script will find ALL carousels on the page and make them work.
+        document.addEventListener('DOMContentLoaded', function () {
+            // Select all carousel containers
+            const carousels = document.querySelectorAll('.carousel-container');
+
+            // Loop through each carousel we found
+            carousels.forEach(carousel => {
+                const images = carousel.querySelectorAll('.carousel-image');
+                const prevBtn = carousel.querySelector('.prev-btn');
+                const nextBtn = carousel.querySelector('.next-btn');
+
+                // If a carousel has no buttons, skip it.
+                if (!prevBtn || !nextBtn) return;
+                
+                let currentIndex = 0;
+
+                // Function to show the correct image and hide others
+                function showImage(index) {
+                    images.forEach((img, i) => {
+                        img.classList.remove('active');
+                        if (i === index) {
+                            img.classList.add('active');
+                        }
+                    });
+                }
+
+                // Event listener for the 'next' button
+                nextBtn.addEventListener('click', () => {
+                    currentIndex++;
+                    if (currentIndex >= images.length) {
+                        currentIndex = 0; // Loop back to the first image
+                    }
+                    showImage(currentIndex);
+                });
+
+                // Event listener for the 'previous' button
+                prevBtn.addEventListener('click', () => {
+                    currentIndex--;
+                    if (currentIndex < 0) {
+                        currentIndex = images.length - 1; // Loop back to the last image
+                    }
+                    showImage(currentIndex);
+                });
+
+                // Initially show the first image
+                showImage(currentIndex);
+            });
+        });
+    </script>
 
 </body>
 </html>
