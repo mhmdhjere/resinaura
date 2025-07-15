@@ -74,12 +74,43 @@ function ProductDetail() {
   const navigate = useNavigate();
   const product = products.find(p => p.id === id);
   const [current, setCurrent] = React.useState(0);
+  const [previewOpen, setPreviewOpen] = React.useState(false);
+  const startX = React.useRef(null);
   if (!product) return <div style={{ color: '#fff', textAlign: 'center', marginTop: '3rem' }}>Product not found</div>;
   const [first, ...rest] = product.name.split(' ');
+
+  React.useEffect(() => {
+    if (!previewOpen) return;
+    function onKey(e) { if (e.key === 'Escape') setPreviewOpen(false); }
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [previewOpen]);
+
+  // Swipe handlers
+  function handleTouchStart(e) {
+    startX.current = e.touches ? e.touches[0].clientX : e.clientX;
+  }
+  function handleTouchEnd(e) {
+    if (startX.current === null) return;
+    const endX = e.changedTouches ? e.changedTouches[0].clientX : e.clientX;
+    const diff = endX - startX.current;
+    if (Math.abs(diff) > 50) {
+      if (diff < 0 && current < product.images.length - 1) setCurrent(current + 1);
+      if (diff > 0 && current > 0) setCurrent(current - 1);
+    }
+    startX.current = null;
+  }
+
   return (
     <div className="perfume-page">
       <div className="perfume-image-container">
-        <img src={product.images[current]} alt={product.name} className="perfume-image" />
+        <img
+          src={product.images[current]}
+          alt={product.name}
+          className="perfume-image"
+          onClick={() => setPreviewOpen(true)}
+          style={{ cursor: 'zoom-in' }}
+        />
         <div className="carousel-dots">
           {product.images.map((_, idx) => (
             <span
@@ -102,6 +133,24 @@ function ProductDetail() {
         <p className="perfume-description">{product.desc}</p>
         <button className="product-detail-back" onClick={() => navigate(-1)} style={{marginTop:'1.5rem'}}>Back</button>
       </div>
+      {previewOpen && (
+        <div
+          className="image-preview-overlay"
+          onClick={() => setPreviewOpen(false)}
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+          onMouseDown={handleTouchStart}
+          onMouseUp={handleTouchEnd}
+        >
+          <img
+            src={product.images[current]}
+            alt={product.name}
+            className="image-preview-full"
+            onClick={e => e.stopPropagation()}
+          />
+          <button className="image-preview-close" onClick={() => setPreviewOpen(false)}>&times;</button>
+        </div>
+      )}
     </div>
   );
 }
