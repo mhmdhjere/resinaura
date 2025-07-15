@@ -9,12 +9,72 @@
     overflow-x: hidden;
   }
   
+  .perfume-image-container {
+    position: relative;
+    width: 100%;
+  }
+  
   .perfume-image {
     width: 100%;
     height: auto;
     border-bottom: 1px solid rgba(255,255,255,0.1);
     /* Smooth curved bottom using bezier curve */
     clip-path: ellipse(100% 85% at 50% 0%);
+    transition: opacity 0.3s ease;
+  }
+  
+  .carousel-dots {
+    position: absolute;
+    bottom: 8%;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 15px;
+    z-index: 10;
+  }
+  
+  .carousel-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.6);
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+  }
+  
+  .carousel-dot:hover {
+    border-color: rgba(255, 255, 255, 0.9);
+    transform: scale(1.1);
+  }
+  
+  .carousel-dot.active {
+    background: rgba(255, 255, 255, 0.9);
+    border-color: rgba(255, 255, 255, 1);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+  }
+  
+  .carousel-dot::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transition: all 0.3s ease;
+  }
+  
+  .carousel-dot.active::before {
+    background: rgba(0, 0, 0, 0.8);
+  }
+  
+  .perfume-text {
+    position: relative;
+    z-index: 5;
   }
   
   .perfume-title {
@@ -22,6 +82,7 @@
     margin: 20px 0 5px;
     font-weight: 400;
     font-style: italic;
+    transition: all 0.3s ease;
   }
   
   .perfume-title span {
@@ -36,6 +97,7 @@
     font-weight: 600;
     font-size: 0.9rem;
     letter-spacing: 1px;
+    transition: all 0.3s ease;
   }
   
   .perfume-description {
@@ -44,4 +106,23 @@
     padding: 0 20px;
     margin-top: 10px;
     opacity: 0.9;
+    transition: all 0.3s ease;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 480px) {
+    .carousel-dots {
+      bottom: 6%;
+      gap: 12px;
+    }
+    
+    .carousel-dot {
+      width: 10px;
+      height: 10px;
+    }
+    
+    .carousel-dot::before {
+      width: 4px;
+      height: 4px;
+    }
   }
