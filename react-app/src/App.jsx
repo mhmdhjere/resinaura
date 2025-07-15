@@ -103,7 +103,13 @@ function ProductDetail() {
 
   return (
     <div className="perfume-page">
-      <div className="perfume-image-container">
+      <div
+        className="perfume-image-container"
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
+        onMouseDown={handleTouchStart}
+        onMouseUp={handleTouchEnd}
+      >
         <img
           src={product.images[current]}
           alt={product.name}
@@ -157,20 +163,7 @@ function ProductDetail() {
 
 function Home() {
   const navigate = useNavigate();
-  React.useEffect(() => {
-    document.body.style.background = '';
-    document.body.style.backgroundImage = `url(${background})`;
-    document.body.style.backgroundSize = 'cover';
-    document.body.style.backgroundPosition = 'center';
-    document.body.style.backgroundAttachment = 'fixed';
-    return () => {
-      document.body.style.background = '';
-      document.body.style.backgroundImage = '';
-      document.body.style.backgroundSize = '';
-      document.body.style.backgroundPosition = '';
-      document.body.style.backgroundAttachment = '';
-    };
-  }, []);
+  // Remove background image logic from here
   return (
     <>
       <Header />
