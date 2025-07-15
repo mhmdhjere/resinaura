@@ -1,0 +1,47 @@
+.perfume-page {
+    background-color: #000;
+    color: #fff;
+    font-family: 'Georgia', serif;
+    text-align: center;
+    padding-bottom: 30px;
+    max-width: 450px;
+    margin: auto;
+    overflow-x: hidden;
+  }
+  
+  .perfume-image {
+    width: 100%;
+    height: auto;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    /* Smooth curved bottom using bezier curve */
+    clip-path: ellipse(100% 85% at 50% 0%);
+  }
+  
+  .perfume-title {
+    font-size: 2.5rem;
+    margin: 20px 0 5px;
+    font-weight: 400;
+    font-style: italic;
+  }
+  
+  .perfume-title span {
+    font-weight: bold;
+    font-size: 2.8rem;
+  }
+  
+  .perfume-info {
+    display: flex;
+    justify-content: space-around;
+    margin: 10px 20px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+  }
+  
+  .perfume-description {
+    font-size: 0.85rem;
+    line-height: 1.6;
+    padding: 0 20px;
+    margin-top: 10px;
+    opacity: 0.9;
+  }
